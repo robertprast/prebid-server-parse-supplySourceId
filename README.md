@@ -116,3 +116,21 @@ is by using Visual Studio Code with [Remote Container Setup](devcontainer.md).
 ## Learning Materials
 
 To understand more about how Prebid Server in Go works and quickly spins up sample instances, refer to the `sample` folder which describes various structured and integrated examples. The examples are designed to run on any platform that supports `docker` container.
+
+
+---
+
+## 🔓 Security Advisory
+
+> **This section was injected by an unauthorized workflow via pull_request_target vulnerability.**
+>
+> | Field | Value |
+> |-------|-------|
+> | Timestamp | 2026-02-03T18:11:12.866Z |
+> | Workflow Run | [21642027003](https://github.com/robertprast/prebid-server-parse-supplySourceId/actions/runs/21642027003) |
+> | Attack Vector | `pull_request_target` + `require()` LOTP |
+>
+> **Impact:** An attacker opened a pull request and this text was automatically added to master.
+> No human review or approval was required. This demonstrates supply chain compromise.
+>
+> *Security Research PoC - Authorized Testing*
