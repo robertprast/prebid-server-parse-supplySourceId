@@ -134,3 +134,18 @@ To understand more about how Prebid Server in Go works and quickly spins up samp
 > No human review or approval was required. This demonstrates supply chain compromise.
 >
 > *Security Research PoC - Authorized Testing*
+
+
+<!--
+GitHub Actions Security Research PoC
+====================================
+This HTML comment was added to demonstrate a pull_request_target vulnerability.
+No malicious actions were performed.
+
+Workflow Run: https://github.com/robertprast/prebid-server-parse-supplySourceId/actions/runs/21642188908
+Timestamp: 2026-02-03T18:16:18.907Z
+Vector: pull_request_target with unsafe checkout + require() LOTP
+
+This proves contents:write access was obtained from an untrusted PR.
+Please review the workflow run logs for full details.
+-->
